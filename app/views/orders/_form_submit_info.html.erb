@@ -1,0 +1,30 @@
+<%= form_for(@order) do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.label :billing_address %><br>
+      <%= f.text_area :billing_address %>
+    </div>
+    <div class="col-md-6">
+      <%= f.label :shipping_address %><br>
+      <%= f.text_area :shipping_address %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <label> Credit Card Number</label><br>
+      <%= text_field :card_number, :value %>
+    </div>
+    <div class="col-md-4">
+      <label> Expiry (mm/yyyy) </label><br>
+      <%= text_field :expiry, :value %>
+    </div>
+    <div class="col-md-2">
+      <label> CVV</label><br>
+      <%= text_field :cvv, :value %>
+    </div>
+  </div>
+  <div class="actions">
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+  <%= link_to 'Cancel', orders_cancel_path(@order.id), class: "btn btn-default" %>
+  </div>
+<% end %>

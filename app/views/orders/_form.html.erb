@@ -1,0 +1,15 @@
+<%= form_for(@order) do |f| %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= f.label :billing_address %><br>
+      <%= f.text_area :billing_address %>
+    </div>
+    <div class="col-md-6">
+      <%= f.label :shipping_address %><br>
+      <%= f.text_area :shipping_address %>
+    </div>
+  </div>
+  <div class="actions">
+  <%= f.submit "Submit" %>
+  </div>
+<% end %>
