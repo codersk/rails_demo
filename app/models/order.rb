@@ -24,8 +24,16 @@ class Order < ActiveRecord::Base
     self.save!
   end
 
-  def order_cancel
-    self.status = 'cancelled'
-    self.save!
+  def authorize (credit_card)
+    unless credit_card[:card_number] == ""
+      self.status = 'payment_complete'
+      self.save
+      str = "Card Details\n Number: " + credit_card[:card_number] 
+      str += "\nExpairy Date: " + credit_card[:expiry_date] 
+      str += "\nCVV: " + credit_card[:cvv]
+    else
+      "Fields are Empty"
+    end
   end
+  
 end

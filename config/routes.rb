@@ -25,6 +25,10 @@ Rails.application.routes.draw do
 
   get 'orders/:id/cancel' => 'orders#cancel', :as => :orders_cancel
 
+  get 'orders/:id/checkout' => 'orders#checkout', :as => :orders_checkout
+  
+  post 'orders/:id/authorize' => 'orders#authorize', :as => :orders_authorize
+
   resources :line_items
 
   get 'line_items/:id/delete' => 'line_items#delete', :as => :line_items_delete

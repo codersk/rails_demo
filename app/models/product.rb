@@ -21,10 +21,14 @@ class Product < ActiveRecord::Base
   end
 
   def add_new_item(current_user, qty)
-    if Order.find_by(user_id: current_user.id) && Order.where(status: 'cart') 
-      LineItem.create(order_id: Order.find_by(user_id: current_user.id).id , product_id: id, qty: qty['value'].to_i , tax: tax_rate)
+    # order ||= Order.create(user_id: current_user.id)
+    order =  Order.find_by(user_id: current_user.id, status: 'cart')
+    if order
+      LineItem.create(order_id: Order.find_by(user_id: current_user.id).id , product_id: id, qty: qty , tax: tax_rate)
+      return order
     else
-      Order.create( Billing_address: "BEML", shipping_address: "BTM", user_id: current_user.id)
+      Order.create( billing_address: "BEML", shipping_address: "BTM", user_id: current_user.id)
+      add_new_item(current_user, qty)
     end
   end
 end

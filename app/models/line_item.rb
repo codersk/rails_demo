@@ -30,9 +30,11 @@ class LineItem < ActiveRecord::Base
   def update_quantity(new_qty)
     self.qty = new_qty
     self.save
+    order
   end
 
   def delete
     self.destroy
+    order
   end
 end

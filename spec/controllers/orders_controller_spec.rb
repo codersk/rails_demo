@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OrdersController, :type => :controller do
-  
+  let(:user) { FactoryGirl.create(:user) }
   describe 'GET index' do
 
     it 'list orders' do

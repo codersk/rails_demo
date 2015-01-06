@@ -16,7 +16,6 @@ class OrdersController < ApplicationController
   
   def create
     @order = Order.new(order_params)
-    binding.pry
     if @order.save
       redirect_to(:action => 'index')
     else
@@ -38,20 +37,30 @@ class OrdersController < ApplicationController
   end
 
   def delete
-    binding.pry
     @order = Order.find(params[:id])
   end
 
   def destroy
-    binding.pry
     Order.find(params[:id]).destroy
-    binding.pry
     redirect_to(:action => 'index')
+  end
+  
+  def checkout
+    order = Order.find(params[:id])
+    order.update_attributes(status: 'checkout')
+    redirect_to order_path(order)
+  end
+  
+  def authorize
+    Order.find(params[:id]).update_attributes(billing_address: params[:order][:billing_address], shipping_address: params[:order][:shipping_address])
+    str = Order.find(params[:id]).authorize(params[:Credit_card])
+    flash[:notice] = str
+    redirect_to orders_path()
   end
 
   def cancel
-    Order.find(params[:id]).order_cancel
-    redirect_to(:action => 'index')
+    Order.find(params[:id]).update_attributes(status: 'cancelled')
+    redirect_to orders_path
   end
 
   private

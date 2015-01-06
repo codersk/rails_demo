@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe ProductsController, :type => :controller do
+  let(:user) { FactoryGirl.create(:user) }
   
   describe 'GET index' do
-  before_action :authenticate_user!
 
     it 'list products' do
+      expect(assigns(:product)).to eq(products)
       products = Product.all
       get :index
-      expect(assigns(:products)).to eq(products)
       binding.pry
     end
     

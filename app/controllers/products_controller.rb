@@ -45,8 +45,11 @@ class ProductsController < ApplicationController
   end
 
   def add_to_cart
-    product = Product.find(params[:id]).add_new_item(current_user, params[:qty])
-    redirect_to order_path(product.order_id)
+    if order = Product.find(params[:id]).add_new_item(current_user, params[:qty].values[0].to_i)
+      redirect_to order_path(order)
+    else
+      redirect_to products
+    end
   end
 
   private

@@ -57,7 +57,7 @@
               <%= line_item.tax %>
             </div>
             <div class='col-md-3'>
-              <%= line_item.total %>
+              <%= line_item.total.round(2) %>
             </div>
             <div class='col-md-3'>
               <%= link_to 'Remove', line_item, method: :delete,class: "btn btn-danger" %>
@@ -66,36 +66,46 @@
         </div>
       </div>
     <% end %>
-    <hr>
-    <div class='row'>
-      <div class='col-md-4'>
-      </div>
-      <div class='col-md-1'>
-      </div>
-      <div class='col-md-3'>
-      </div>
-      <div class='col-md-4'>
-        <div class='row'>
-          <div class='col-md-3'>
-            <strong><%= @order.subtotal %></strong>
-          </div>
-          <div class='col-md-3'>
-            <strong><%= @order.tax %></strong>
-          </div>
-          <div class='col-md-3'>
-            <strong><%= @order.total %></strong>
-          </div>
-          <div class='col-md-3'>
-          </div>
+  <% end %>
+  <hr>
+  <div class='row'>
+    <div class='col-md-4'>
+    </div>
+    <div class='col-md-1'>
+    </div>
+    <div class='col-md-3'>
+    </div>
+    <div class='col-md-4'>
+      <div class='row'>
+        <div class='col-md-3'>
+          <strong><%= @order.subtotal.round(2) %></strong>
+        </div>
+        <div class='col-md-3'>
+          <strong><%= @order.tax.round(2) %></strong>
+        </div>
+        <div class='col-md-3'>
+          <strong><%= @order.total.round(2) %></strong>
+        </div>
+        <div class='col-md-3'>
+          <% if @order.status == 'cart' &&  @line_items.count > 0 %>
+            <%= button_to 'Checkout', orders_checkout_path(@order), :method => :get, :class => "btn btn-info" %>
+          <% end %>
         </div>
       </div>
     </div>
-  <% end %>
-  <div class='rwo'>
-    <div class='col-md-12'>
-      <h4>Edit Details</h4>
-      <%= render 'form_submit_info' %>
-    </div>
   </div>
+
+  <% if @order.status == 'checkout' %>
+  <hr>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 name="add_div">Address & Payment Details</h3></div>
+      <div class="panel-body">
+        <%= render 'form_submit_info' %>
+      </div>
+    </div>
+  <% end %>
+  <ul class="pager">
+    <li class="previous"> <%= link_to '<< Products', products_path %></li>
+  </ul>
 </div>
 

@@ -8,7 +8,7 @@ FactoryGirl.define do
     trait :order_1 do
       billing_address "BTM"
       shipping_address "BEML"
-      status "basket"
+      total 0.0
     end
 
     trait :order_2 do
