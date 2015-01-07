@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :product do
     product_name "san"
-    price 12.0
-    tax_rate 2.3
+    price 5.0
+    tax_rate 1.2
     description "sdlahsdflasndfl"
     thumburl 'http://www.google.co.in'
     association :category

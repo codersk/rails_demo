@@ -2,14 +2,16 @@ require 'rails_helper'
 
 RSpec.describe ProductsController, :type => :controller do
   let(:user) { FactoryGirl.create(:user) }
+  before do
+    sign_in user
+  end
   
   describe 'GET index' do
 
     it 'list products' do
-      expect(assigns(:product)).to eq(products)
       products = Product.all
       get :index
-      binding.pry
+      expect(assigns(:products)).to eq(products)
     end
     
     it 'render index page template' do
@@ -41,6 +43,11 @@ RSpec.describe ProductsController, :type => :controller do
 
     it 'Delete product' do
       get :delete, :id => 4
+      expect(assigns(:product).id).to eq(4)
+    end
+
+    it 'Product add to cart' do
+      post :add_to_cart, :id => 956
       expect(assigns(:product).id).to eq(4)
     end
   end

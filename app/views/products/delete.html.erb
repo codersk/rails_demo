@@ -1,24 +1,26 @@
-<p>
-  <strong>Product name: <%= @product.product_name %></strong>
+<div class="container">
+  <p>
+    <strong>Product name: <%= @product.product_name %></strong>
 
-</p>
+  </p>
 
-<p>
-  <strong>Description: <%= @product.description %></strong>
+  <p>
+    <strong>Description: <%= @product.description %></strong>
 
-</p>
+  </p>
 
-<p>
-  <strong>Price: <%= @product.price %></strong>
+  <p>
+    <strong>Price: <%= @product.price %></strong>
 
-</p>
+  </p>
 
-<p>
-  <strong>Thumburl: <%= @product.thumburl %></strong>
+  <p>
+    <strong>Thumburl: <%= @product.thumburl %></strong>
 
-</p>
+  </p>
 
 
-<%= link_to 'Delete', @product, method: :delete %> |
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+  <%= link_to 'Delete', @product, method: :delete %> |
+  <%= link_to 'Edit', edit_product_path(@product) %> |
+  <%= link_to 'Back', products_path %>
+</div>

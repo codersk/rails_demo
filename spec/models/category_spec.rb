@@ -13,7 +13,8 @@ RSpec.describe Category, :type => :model do
     expect(category.thumburl).to match( /^http(s?)\W/)
   end
 
-  # negative passing case
+  # negative test cases
+  
   it "Category name should not contain numeric values" do
     expect(category.name).to be_a(String)
   end

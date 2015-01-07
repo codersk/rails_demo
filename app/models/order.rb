@@ -19,8 +19,8 @@ class Order < ActiveRecord::Base
     line_items.each do |x|
       self.subtotal += x.unit_price * x.qty
       self.tax += x.tax
+      self.total += x.total
     end
-    self.total += self.subtotal + ( self.subtotal * self.tax/100 )
     self.save!
   end
 

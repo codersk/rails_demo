@@ -1,14 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe CategoriesController, :type => :controller do
-  
+  let(:user) { FactoryGirl.create(:user) }
+  before do
+    sign_in user
+  end
+
   describe 'GET index' do
 
     it 'list categories' do
       category = Category.all
       get :index
       expect(assigns(:categories)).to eq(category)
-      binding.pry
     end
 
     it 'render index page template' do
@@ -31,12 +34,6 @@ RSpec.describe CategoriesController, :type => :controller do
       get :edit, :id => 1
       expect(assigns(:category).id).to eq(1)
       expect(response).to render_template('edit')
-    end
-
-    it 'Edit category' do
-      put :edit, :id => 1, :category => "Electronics"
-      expect(assigns(:category).id).to eq(1)
-      expect(response).to render_template('index')
     end
 
     it 'Delete category' do

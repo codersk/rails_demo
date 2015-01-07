@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe Order, :type => :model do
   let(:order) { FactoryGirl.create(:order) }
   let(:order_1)  { FactoryGirl.create(:order, :order_1) }
-  # let(:line_item) { FactoryGirl.create(:line_item) }
-  # let(:line_item2) { FactoryGirl.create(:line_item, :line_item2) }
   
   it "Order billing_address should not be empty" do
     expect(order.billing_address).not_to be_empty
@@ -18,7 +16,8 @@ RSpec.describe Order, :type => :model do
     expect(order.status).to match( /(cart|payment_complete|checkout|cancelled)/ )
   end
   
-  # negative testing
+  # negative test cases
+
   it "Calculates order totals should be 0.00 when there are no items" do
     if order_1.line_items.count == 0
       expect(order_1.total).to eq(0.0)
@@ -47,11 +46,10 @@ RSpec.describe Order, :type => :model do
         subtotal += l.unit_price * l.qty
         tax += l.tax
         total += l.total
-        binding.pry
       end
-      expect(order.subtotal).to eq(subtotal)
-      expect(order.tax).to eq(tax)
-      expect(order.total).to eq(total)
+      expect( [order.subtotal, order.tax, order.total] ).to eq([subtotal, tax, total])
     end
-  end 
+  end
+
+  it "Cancels the Order correctly"
 end

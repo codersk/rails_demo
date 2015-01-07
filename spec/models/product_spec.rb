@@ -47,7 +47,7 @@ RSpec.describe Product, :type => :model do
     expect(product.tax_rate).not_to be < 0
   end
 
-  # Negative testing
+  # Negative test cases
 
   it "creating product without name should raise error" do
     expect{ product.product_name = nil; product.save!.save }.to raise_error( ActiveRecord::RecordInvalid )

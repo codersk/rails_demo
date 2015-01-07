@@ -1,13 +1,21 @@
 <%= form_for(@category) do |f| %>
-  <div class="name">
-  <%= f.label :name %><br>
-  <%= f.text_field :name %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.label :name %>
+    </div>
+    <div class="col-md-4">
+      <%= f.text_field :name %>
+    </div>
   </div>
-  <div class="thumburl">
-  <%= f.label :thumburl %><br>
-  <%= f.text_field :thumburl %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= f.label :thumburl %>
+    </div>
+    <div class="col-md-4">
+      <%= f.text_field :thumburl %>
+    </div>
   </div>
   <div class="actions">
-  <%= f.submit %>
+    <%= f.submit "Update category", class: "btn btn-primary"   %>
   </div>
 <% end %>

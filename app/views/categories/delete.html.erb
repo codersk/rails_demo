@@ -1,13 +1,15 @@
-<p>
-  <strong>Name:</strong>
-  <%= @category.name %>
-</p>
+<div class="container">
+  <p>
+    <strong>Name:</strong>
+    <%= @category.name %>
+  </p>
 
-<p>
-  <strong>Thumburl:</strong>
-  <%= image_tag @category.thumburl %>
-</p>
+  <p>
+    <strong>Thumburl:</strong><br>
+    <%= image_tag @category.thumburl %>
+  </p>
 
-<%= link_to "Delete", @category, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+  <%= link_to "Delete", @category, method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <%= link_to 'Edit', edit_category_path(@category) %> |
+  <%= link_to 'Back', categories_path %>
+</div>

@@ -1,13 +1,15 @@
-<p>
-  <strong>Order Id:</strong>
-  <%= @order.id %>
-</p>
+<div class="container">
+  <p>
+    <strong>Order Id:</strong>
+    <%= @order.id %>
+  </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @order.status %>
-</p>
+  <p>
+    <strong>Status:</strong>
+    <%= @order.status %>
+  </p>
 
-<%= link_to "Delete", @order, method: :delete, data: { confirm: 'Are you sure?' } %> |
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+  <%= link_to "Delete", @order, method: :delete, data: { confirm: 'Are you sure?' } %> |
+  <%= link_to 'Edit', edit_order_path(@order) %> |
+  <%= link_to 'Back', orders_path %>
+</div>

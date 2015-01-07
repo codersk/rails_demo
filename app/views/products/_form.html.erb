@@ -1,30 +1,32 @@
 <%= form_for(@product) do |f| %>
-
-  <div class="product_name">
-    <%= f.label :product_name %>
-    <%= f.text_field :product_name %>   
-  </div>
-  <div class="description">
-    <%= f.label :description %>
-    <%= f.text_field :description %>  
-  </div>
-  <div class="price">
-    <%= f.label :price %>
-    <%= f.text_field :price %> 
-  </div>
-  <div class="thumburl">
-    <%= f.label :thumburl %>
-    <%= f.url_field :thumburl %>
-  </div>
-  <div class="category">
-    <%= f.label :category_id %>
-    <%= f.text_field :category_id %>
-  </div>
-  <div class="tax_rate">
-    <%= f.label :tax_rate %>
-    <%= f.text_field :tax_rate %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <table class="table">
+    <tr class="row">
+      <th class="col-md-3"><%= f.label :product_name %></th>
+      <td class="col-md-3"><%= f.text_field :product_name, class: "col-md-12"  %></td>
+    </tr>
+    <tr class="row">
+      <th class="col-md-3"><%= f.label :description %></th>
+      <td class="col-md-3"><%= f.text_field :description, class: "col-md-12"  %>  </td>
+    </tr>
+    <tr class="row">
+      <th class="col-md-3"><%= f.label :price %></th>
+      <td class="col-md-3"><%= f.text_field :price, class: "col-md-12"  %> </td>
+    </tr>
+    <tr class="row">
+      <th class="col-md-3"><%= f.label :thumburl %></th>
+      <td class="col-md-3"><%= f.url_field :thumburl, class: "col-md-12"  %></td>
+    </tr>
+    <tr class="row">
+      <th class="col-md-3"><%= f.label :category_id %></th>
+      <td class="col-md-3"><%= f.text_field :category_id, class: "col-md-12"  %></tr>
+    </tr>
+    <tr class="row">
+      <th class="col-md-3"><%= f.label :tax_rate %></th>
+      <td class="col-md-3"><%= f.text_field :tax_rate, class: "col-md-12"  %></td>
+    </tr>
+    <tr class="row">
+     <th class="col-md-3"></th>
+     <th class="col-md-3"> <%= f.submit "Save", class: "btn btn-block btn-primary pull-right" %></th>
+    </tr>
+  </table>
 <% end %>

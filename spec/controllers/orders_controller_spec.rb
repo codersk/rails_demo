@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe OrdersController, :type => :controller do
   let(:user) { FactoryGirl.create(:user) }
+  before do
+    sign_in user
+  end
+
   describe 'GET index' do
 
     it 'list orders' do
@@ -28,20 +32,20 @@ RSpec.describe OrdersController, :type => :controller do
     end
 
     it 'Edit order' do
-      get :edit, :id => 5
-      expect(assigns(:order).id).to eq(5)
+      get :edit, :id => 956
+      expect(assigns(:order).id).to eq(956)
       expect(response).to render_template('edit')
     end
 
     it 'Edit order' do
-      put :edit, :id => 5
-      expect(assigns(:order).id).to eq(5)
+      put :edit, :id => 956
+      expect(assigns(:order).id).to eq(956)
       expect(response).to render_template('edit')
     end
 
     it 'Delete order' do
-      get :delete, :id => 5
-      expect(assigns(:order).id).to eq(5)
+      get :delete, :id => 956
+      expect(assigns(:order).id).to eq(956)
     end
   end
 end

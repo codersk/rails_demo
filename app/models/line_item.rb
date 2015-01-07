@@ -7,23 +7,13 @@ class LineItem < ActiveRecord::Base
   after_save :recalculate_order
   after_destroy :recalculate_order
 
-  # def calculate_lineitem_total
-  #   p = Product.find(self.product_id)
-  #   if p.price.nil?
-  #     puts "Product Price not available"
-  #   else
-  #     self.unit_price ||= p.price
-  #     self.total = (self.unit_price + ((self.unit_price * self.tax)/100) )* self.qty
-  #   end
-  # end
-
   def calculate_lineitem_total
     self.unit_price ||= product.price
-    self.total = ( self.unit_price + (self.unit_price * self.tax/100) )* self.qty
+    self.tax = (self.unit_price * product.tax_rate/100) * self.qty
+    self.total = (self.unit_price * self.qty) + self.tax
   end
 
   def recalculate_order
-    # self.order
     order.recalculate_order
   end
 
