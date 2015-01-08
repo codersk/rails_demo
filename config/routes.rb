@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   post 'products/:id/add_to_cart' => 'products#add_to_cart', :as => :products_add_to_cart
 
+  post 'products/:id/validate' => 'products#validate', :as => :products_validate
+
   get 'pages/calculator'
 
   resources :categories
@@ -21,17 +23,17 @@ Rails.application.routes.draw do
 
   resources :orders
 
-  get 'orders/:id/delete' => 'orders#delete', :as => :orders_delete
-
   get 'orders/:id/cancel' => 'orders#cancel', :as => :orders_cancel
 
   get 'orders/:id/checkout' => 'orders#checkout', :as => :orders_checkout
   
-  post 'orders/:id/authorize' => 'orders#authorize', :as => :orders_authorize
+  post 'orders/:id/validate' => 'orders#validate', :as => :orders_validate
 
   resources :line_items
 
   get 'line_items/:id/delete' => 'line_items#delete', :as => :line_items_delete
+  
+  post 'line_items/:id/update_quantity' => 'line_items#update_quantity', :as => :line_items_update_quantity
 
   # resources :line_items
 

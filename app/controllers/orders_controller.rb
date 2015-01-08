@@ -9,10 +9,6 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @line_items = @order.line_items
   end
-
-  def new
-    @order = Order.new
-  end
   
   def create
     @order = Order.new(order_params)
@@ -21,10 +17,6 @@ class OrdersController < ApplicationController
     else
       render('new')
     end
-  end
-
-  def edit
-    @order = Order.find(params[:id])
   end
   
   def update
@@ -35,15 +27,6 @@ class OrdersController < ApplicationController
       render('index')
     end
   end
-
-  def delete
-    @order = Order.find(params[:id])
-  end
-
-  def destroy
-    Order.find(params[:id]).destroy
-    redirect_to(:action => 'index')
-  end
   
   def checkout
     order = Order.find(params[:id])
@@ -51,10 +34,10 @@ class OrdersController < ApplicationController
     redirect_to order_path(order)
   end
   
-  def authorize
+  def validate
     Order.find(params[:id]).update_attributes(billing_address: params[:order][:billing_address], shipping_address: params[:order][:shipping_address])
-    str = Order.find(params[:id]).authorize(params[:Credit_card])
-    flash[:notice] = str
+    msg = Order.find(params[:id]).authorize(params[:Credit_card])
+    flash[:notice] = msg
     redirect_to orders_path()
   end
 

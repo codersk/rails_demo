@@ -1,4 +1,4 @@
-<%= form_for(@order, url: orders_authorize_path(@order), method: :post) do |f| %>
+<%= form_for(@order, url: orders_validate_path(@order), method: :post) do |f| %>
   <div class="row">
     <div class="col-md-6">
       <%= f.label :billing_address %><br>

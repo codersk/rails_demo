@@ -15,8 +15,10 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
+      flash[:notice] = "Category added successfully!"
       redirect_to(:action => 'index')
     else
+      flash[:alert] = "All fields are mandetory!"
       render('new')
     end
   end
@@ -28,8 +30,10 @@ class CategoriesController < ApplicationController
   def update
     @category = Category.find(params[:id])
     if @category.update_attributes(category_params)
+      flash[:notice] = "Category updated successfully!"
       redirect_to(:action => 'index', :id => @category.id)
     else
+      flash[:alert] = "All fields are mandetory!"
       redirect_to(:action => 'index')
     end
   end
@@ -40,6 +44,7 @@ class CategoriesController < ApplicationController
   
   def destroy
     Category.find(params[:id]).destroy
+    flash[:alert] = "Category deleted successfully!"
     redirect_to(:action => 'index')
   end
   

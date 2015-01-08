@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ProductsController, :type => :controller do
   let(:user) { FactoryGirl.create(:user) }
+  let(:product) { FactoryGirl.create(:product) }
   before do
     sign_in user
   end
@@ -28,27 +29,29 @@ RSpec.describe ProductsController, :type => :controller do
       get :new
       expect(assigns(:product).id).to eq(product.id)
       expect(response.status).to eq(200)
-      binding.pry
     end
 
     it 'Edit product' do
-      get :edit, :id => 4
-      expect(assigns(:product).id).to eq(4)
+      get :edit, :id => product.id
+      expect(assigns(:product).id).to eq(product.id)
     end
 
-    it 'Edit product' do
-      put :edit, :id => 4, :product => "Plant"
-      expect(assigns(:product).id).to eq(4)
+    it 'Update product' do
+      put :edit, :id => product.id, :product => product.product_name
+      expect(assigns(:product).id).to eq(product.id)
+      expect(response.status).to eq(200)
     end
 
     it 'Delete product' do
-      get :delete, :id => 4
-      expect(assigns(:product).id).to eq(4)
+      get :delete, :id => product.id
+      expect(assigns(:product).id).to eq(product.id)
+      expect(response.status).to eq(200)
     end
 
     it 'Product add to cart' do
-      post :add_to_cart, :id => 956
-      expect(assigns(:product).id).to eq(4)
+      subject { post :add_to_cart, :id => product.id, :qty => { :values => 1 } }
+      expect(subject).to redirect_to order_path(product.id)
+      expect(response.status).to eq(302)
     end
   end
 end

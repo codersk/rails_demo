@@ -25,14 +25,12 @@ class Order < ActiveRecord::Base
   end
 
   def authorize (credit_card)
-    unless credit_card[:card_number] == ""
+    if credit_card[:card_number] != ""
       self.status = 'payment_complete'
       self.save
-      str = "Card Details\n Number: " + credit_card[:card_number] 
-      str += "\nExpairy Date: " + credit_card[:expiry_date] 
-      str += "\nCVV: " + credit_card[:cvv]
+      msg = "Card Details\n Number: " + credit_card[:card_number] +"\n Expairy Date: " + credit_card[:expiry_date] + "\nCVV: " + credit_card[:cvv]
     else
-      "Fields are Empty"
+      "All fields are requaired!"
     end
   end
   

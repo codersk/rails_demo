@@ -14,21 +14,15 @@
   <hr>
   <% @orders.each do |order| %>
     <div class='row'>
-      <div class='col-md-1'> <%= order.id %></div>
-      <div class='col-md-2'> <%= order.billing_address %></div>
-      <div class='col-md-2'> <%= order.shipping_address %></div>
-      <div class='col-md-1'> <%= order.status %></div>
-      <div class='col-md-1'> <%= order.user_id %></div>
-      <div class='col-md-1'> <%= order.subtotal %></div>
-      <div class='col-md-1'> <%= order.tax %></div>
-      <div class='col-md-1'> <%= order.total %></div>
-      <div class='col-md-2'>
-        <div class='row'>
-          <div class='col-md-4'> <%= link_to 'Show', order %></div>
-          <div  class='col-md-4'> <%= link_to 'Edit', edit_order_path(order) %></div>
-          <div class='col-md-4'> <%= link_to 'Delete', orders_delete_path(:id => order.id) %></div>
-        </div>
-      </div>
+      <div class='col-md-1'> <%= order.id %> </div>
+      <div class='col-md-2'> <%= order.billing_address %> </div>
+      <div class='col-md-2'> <%= order.shipping_address %> </div>
+      <div class='col-md-1'> <%= order.status %> </div>
+      <div class='col-md-1'> <%= order.user_id %> </div>
+      <div class='col-md-1'> <%= order.subtotal %> </div>
+      <div class='col-md-1'> <%= order.tax %> </div>
+      <div class='col-md-1'> <%= order.total %> </div>
+      <div class='col-md-2'> <%= link_to 'Show', order, class: "btn btn-xs btn-primary" %> </div>
     </div>
   <% end %>
 </div>

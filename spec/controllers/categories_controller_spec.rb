@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CategoriesController, :type => :controller do
   let(:user) { FactoryGirl.create(:user) }
+  let(:category) { FactoryGirl.create(:category) }
   before do
     sign_in user
   end
@@ -31,14 +32,14 @@ RSpec.describe CategoriesController, :type => :controller do
     end
 
     it 'Edit category' do
-      get :edit, :id => 1
-      expect(assigns(:category).id).to eq(1)
+      get :edit, :id => category.id
+      expect(assigns(:category).id).to eq(category.id)
       expect(response).to render_template('edit')
     end
 
     it 'Delete category' do
-      get :delete, :id => 1
-      expect(assigns(:category).id).to eq(1)
+      get :delete, :id => category.id
+      expect(assigns(:category).id).to eq(category.id)
     end
   end
 end

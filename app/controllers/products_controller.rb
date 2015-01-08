@@ -16,8 +16,10 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     if @product.save
+      flash[:notice] = "Product added successfully!"
       redirect_to(:action => 'index')
     else
+      flash[:alert] = "All fields are mandetory!"
       render('new')
     end
   end
@@ -29,8 +31,10 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if @product.update_attributes(product_params)
+      flash[:notice] = "Product updated successfully!"
       redirect_to(:action => 'show', :id => @product.id)
     else
+      flash[:alert] = "All fields are mandetory!"
       render('index')
     end
   end
@@ -41,13 +45,16 @@ class ProductsController < ApplicationController
   
   def destroy
     Product.find(params[:id]).destroy
+    flash[:alert] = "Product deleted successfully!"
     redirect_to(:action => 'index')
   end
 
   def add_to_cart
     if order = Product.find(params[:id]).add_new_item(current_user, params[:qty].values[0].to_i)
+      flash[:notice] = "Product added to cart"
       redirect_to order_path(order)
     else
+      flash[:alert] = "Opps! something went wrong. Try again"
       redirect_to products
     end
   end

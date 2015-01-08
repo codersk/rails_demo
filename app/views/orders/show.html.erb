@@ -17,9 +17,7 @@
       <th> Total </th>
       <th></th>
     </tr>
-  <% @line_items.in_groups_of(3).each do |line_items| %>
-    <% line_items.select! {|x| !x.nil?} %>
-      <% line_items.each do |line_item| %>
+    <% @order.line_items.each do |line_item| %>
       <tr>
         <td class='col-md-4'>
           <%= line_item.product.product_name %>
@@ -28,37 +26,38 @@
           <%= line_item.product.price %>
         </td>
         <td>
-          <%= form_for(line_item, url: line_item, method: :put) do |f| %>
-            <%= f.text_field :qty, class: "col-md-9" %>
-            <%= f.submit 'Change' %>
+          <% if @order.status == 'cart' %>
+            <%= form_for(line_item, url: line_item, method: :put) do |f| %>
+              <%= f.text_field :qty, class: "col-md-9" %>
+              <%= f.submit 'Change' %>
+            <% end %>
+          <% else %>
+            <%= line_item.qty %>
           <% end %>
         </td>
         <td> $<%= line_item.product.price * line_item.qty %></td>
         <td> $<%= line_item.tax.round(2) %> </td>
         <td> $<%= line_item.total.round(2) %></td>
         <td>
-          <%= link_to 'Remove', line_item, method: :delete,class: "btn btn-block btn-danger" %>
+          <%= link_to 'Remove', line_item, method: :delete,class: "btn btn-block btn-danger btn-xs" if @order.status == 'cart' %>
         </td>
       </tr>
     <% end %>
-  <% end %>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td><strong> $<%= @order.subtotal.round(2) %></strong></td>
-    <td>
-      <strong> $<%= @order.tax %></strong>
-    </td>
-    <td>
-      <strong> $<%= @order.total.round(2) %></strong>
-    </td>
-    <td>
-      <% if @order.status == 'cart' &&  @line_items.count > 0 %>
-        <%= button_to 'Checkout', orders_checkout_path(@order), :method => :get, :class => "btn btn-block btn-info" %>
-      <% end %>
-    </td>
-  </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><strong> $<%= @order.subtotal.round(2) %></strong></td>
+      <td>
+        <strong> $<%= @order.tax %></strong>
+      </td>
+      <td>
+        <strong> $<%= @order.total.round(2) %></strong>
+      </td>
+      <td>
+        <%= button_to 'Checkout', orders_checkout_path(@order), :method => :get, :class => "btn btn-block btn-info" if @order.status == 'cart' &&  @line_items.count > 0  %>
+      </td>
+    </tr>
   </table>
 
   <% if @order.status == 'checkout' %>

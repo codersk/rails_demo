@@ -31,4 +31,14 @@ class Product < ActiveRecord::Base
       add_new_item(current_user, qty)
     end
   end
+  
+  def authorize (credit_card)
+    if credit_card[:card_number] != ""
+      self.status = 'payment_complete'
+      self.save
+      msg = "Card Details\n Number: " + credit_card[:card_number] +"\n Expairy Date: " + credit_card[:expiry_date] + "\nCVV: " + credit_card[:cvv]
+    else
+      "All fields are requaired!"
+    end
+  end
 end
