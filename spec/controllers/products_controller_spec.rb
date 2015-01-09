@@ -49,8 +49,8 @@ RSpec.describe ProductsController, :type => :controller do
     end
 
     it 'Product add to cart' do
-      subject { post :add_to_cart, :id => product.id, :qty => { :values => 1 } }
-      expect(subject).to redirect_to order_path(product.id)
+      post :add_to_cart, :id => product.id, :qty => { :values => 1 }
+      expect(response).to redirect_to order_path(product.line_items[0].order_id)
       expect(response.status).to eq(302)
     end
   end

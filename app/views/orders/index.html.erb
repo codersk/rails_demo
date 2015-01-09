@@ -1,28 +1,28 @@
 <div class="container">
-  <strong>
-    <div class='row'>
-      <div class='col-md-1'>Order Id </div>
-      <div class='col-md-2'>billing_address </div>
-      <div class='col-md-2'>shipping_address </div>
-      <div class='col-md-1'>status</div>
-      <div class='col-md-1'>User ID</div>
-      <div class='col-md-1'>Subtotal</div>
-      <div class='col-md-1'>Tax</div>
-      <div class='col-md-1'>Total</div>
-    </div>
-  </strong>
-  <hr>
-  <% @orders.each do |order| %>
-    <div class='row'>
-      <div class='col-md-1'> <%= order.id %> </div>
-      <div class='col-md-2'> <%= order.billing_address %> </div>
-      <div class='col-md-2'> <%= order.shipping_address %> </div>
-      <div class='col-md-1'> <%= order.status %> </div>
-      <div class='col-md-1'> <%= order.user_id %> </div>
-      <div class='col-md-1'> <%= order.subtotal %> </div>
-      <div class='col-md-1'> <%= order.tax %> </div>
-      <div class='col-md-1'> <%= order.total %> </div>
-      <div class='col-md-2'> <%= link_to 'Show', order, class: "btn btn-xs btn-primary" %> </div>
-    </div>
-  <% end %>
-</div>
+  <table class="table table-striped">
+    <tr>
+      <th>Order Id </th>
+      <th>billing_address </th>
+      <th>shipping_address </th>
+      <th>status</th>
+      <th>User ID</th>
+      <th>Subtotal</th>
+      <th>Tax</th>
+      <th>Total</th>
+      <th></th>
+    </tr>
+    <% @orders.each do |order| %>
+      <tr>
+        <td> <%= order.id %> </td>
+        <td> <%= order.billing_address %> </td>
+        <td> <%= order.shipping_address %> </td>
+        <td> <%= order.status %> </td>
+        <td> <%= order.user_id %> </td>
+        <td> <%= order.subtotal %> </td>
+        <td> <%= order.tax %> </td>
+        <td> <%= order.total %> </td>
+        <td> <%= link_to 'Show', order, class: "btn btn-xs btn-primary" %> </td>
+      </tr>
+    <% end %>
+  </table>
+</div>  

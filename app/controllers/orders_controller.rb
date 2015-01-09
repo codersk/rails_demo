@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
   
   def validate
     Order.find(params[:id]).update_attributes(billing_address: params[:order][:billing_address], shipping_address: params[:order][:shipping_address])
-    msg = Order.find(params[:id]).authorize(params[:Credit_card])
+    msg = Order.find(params[:id]).authorize(params[:credit_card])
     flash[:notice] = msg
     redirect_to orders_path()
   end
