@@ -53,5 +53,11 @@ RSpec.describe ProductsController, :type => :controller do
       expect(response).to redirect_to order_path(product.line_items[0].order_id)
       expect(response.status).to eq(302)
     end
+
+    it 'product image should be attached' do
+      expect(product).to have_attached_file(:product_image)
+    end
+
+    it 'product image is should be of type jpeg or gif' 
   end
 end

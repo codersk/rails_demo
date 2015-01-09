@@ -4,6 +4,7 @@ ENV["RAILS_ENV"] = 'test'
 require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require "paperclip/matchers"
 require 'devise'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -50,4 +51,5 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
   config.include Devise::TestHelpers, type: :controller
+  config.include Paperclip::Shoulda::Matchers
 end

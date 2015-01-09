@@ -1,65 +1,57 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-3">
       <h2><%= @category.name %> </h2>
       <p>Explore our latest products from around the world.</p>
+      <strong>Category name: </strong><%= @category.name %><br>
+      <strong>Category Image: </strong><br>
+      <%= image_tag @category.category_image.url(:thumb) %><br>
+      <%= link_to 'Edit', edit_category_path(@category) %> |
+      <%= link_to 'Back', categories_path %> |
+      <%= link_to 'Destroy', @category, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+      <%= link_to 'New Product', new_product_path, class: "btn btn-success" %>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-9">
       <%= puts @category.products %>
       <% @category.products.in_groups_of(3).each do |products| %>
         <div class='row'>
           <% products.compact.each do |product| %>
             <div class='col-md-4'>
               <div class="thumbnail">
-                  <img src= <%= product.thumburl %> >
-                  <div class="caption">
-                    <span class="listing-title"><%= product.product_name %></span>
-                    <span class="listing-price"><%= number_to_currency(product.price) %></span>
-                    <span><%= link_to "Edit", edit_product_path(product.id) %></span>
-                    <span><%= link_to "Delete", products_delete_path(:id => product.id) %></span>
-                  </div>
-                </div>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
-
-    </div>
-  </div>
-  <div>
-    <strong>Category name:</strong><%= @category.name %><br>
-    <strong>Thumburl:</strong><%= @category.thumburl %><br>
-    <%= link_to 'Edit', edit_category_path(@category) %> |
-    <%= link_to 'Back', categories_path %> |
-    <%= link_to 'Destroy', @category, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <br>
-    <br>
-    <br>
-
-    <h1>Listing products</h1>
-
-    <% @products.in_groups_of(3).each do |products| %>
-      <% products.select! {|x| !x.nil?} %>
-      <div class='row'>
-        <% products.each do |product| %>
-          <div class='col-md-4'>
-            <div class="thumbnail">
-                <img src= <%= product.thumburl %> >
+                <%= image_tag product.product_image.url(:medium) %>
                 <div class="caption">
                   <span class="listing-title"><%= product.product_name %></span>
-                  <span class="listing-desc"><%= product.description %></span>
                   <span class="listing-price"><%= number_to_currency(product.price) %></span>
                   <span><%= link_to "Edit", edit_product_path(product.id) %></span>
                   <span><%= link_to "Delete", products_delete_path(:id => product.id) %></span>
                 </div>
               </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-    <br>
-
-    <%= link_to 'New Product', new_product_path, class: "btn btn-success" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
+  <hr>
+  <h1>Listing products</h1>
+  <% @products.in_groups_of(3).each do |products| %>
+    <% products.select! {|x| !x.nil?} %>
+    <div class='row'>
+      <% products.each do |product| %>
+        <div class='col-md-3'>
+          <div class="thumbnail">
+            <%= image_tag product.product_image.url(:medium) %>
+            <div class="caption">
+              <span class="listing-title"><%= product.product_name %></span>
+              <span class="listing-desc"><%= product.description %></span>
+              <span class="listing-price"><%= number_to_currency(product.price) %></span>
+              <span><%= link_to "Edit", edit_product_path(product.id) %></span>
+              <span><%= link_to "Delete", products_delete_path(:id => product.id) %></span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 <br>

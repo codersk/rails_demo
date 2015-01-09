@@ -9,12 +9,18 @@
   </div>
   <div class="row">
     <div class="col-md-4">
-      <%= f.label :thumburl %>
+      <%= f.label :category_image %>
     </div>
     <div class="col-md-4">
-      <%= f.text_field :thumburl %>
+      <%= image_tag @category.category_image.url(:medium) %>
+      <%= f.file_field :category_image %>
     </div>
   </div>
+  <% if @category.category_image.url != "/images/noimage.jpg" %>
+    <div class="row">
+     <div class="col-md-3 col-md-offset-4"> <%= f.check_box :image_delete %> Delete image?</div>
+    </div>
+  <% end %>
   <div class="actions">
     <%= f.submit "Update category", class: "btn btn-primary"   %>
   </div>

@@ -1,4 +1,4 @@
-<%= form_for(@product) do |f| %>
+<%= form_for(@product, :html => { :multipart => true } ) do |f| %>
   <table class="table">
     <tr class="row">
       <th class="col-md-3"><%= f.label :product_name %></th>
@@ -13,16 +13,23 @@
       <td class="col-md-3"><%= f.text_field :price, class: "col-md-12"  %> </td>
     </tr>
     <tr class="row">
-      <th class="col-md-3"><%= f.label :thumburl %></th>
-      <td class="col-md-3"><%= f.url_field :thumburl, class: "col-md-12"  %></td>
-    </tr>
-    <tr class="row">
       <th class="col-md-3"><%= f.label :category_id %></th>
       <td class="col-md-3"><%= f.text_field :category_id, class: "col-md-12"  %></tr>
     </tr>
     <tr class="row">
       <th class="col-md-3"><%= f.label :tax_rate %></th>
       <td class="col-md-3"><%= f.text_field :tax_rate, class: "col-md-12"  %></td>
+    </tr>
+    <tr class="row">
+      <th class="col-md-3"><%= f.label :product_image %></th>
+      <td class="col-md-3">
+        <%= image_tag @product.product_image.url(:medium) %>
+        <%= f.file_field :product_image, class: "col-md-12"  %>
+      </td>
+    </tr>
+    <tr class="row">
+     <th class="col-md-3"></th>
+     <td class="col-md-3"> <%= f.check_box :image_delete %> Delete image?</td>
     </tr>
     <tr class="row">
      <th class="col-md-3"></th>

@@ -41,5 +41,7 @@ RSpec.describe CategoriesController, :type => :controller do
       get :delete, :id => category.id
       expect(assigns(:category).id).to eq(category.id)
     end
+
+    it 'category image'
   end
 end

@@ -13,12 +13,20 @@
       <td><%= @product.price %></td>
     </tr>
     <tr>
-      <th>Thumburl:</th>
-      <td><%= @product.thumburl %></td>
+      <th>Product Image:</th>
+      <td><%= image_tag @product.product_image.url(:medium) %></td>
     </tr>
     <tr>
-      <td><%= link_to 'Edit', edit_product_path(@product) %></td>
-      <td><%= link_to 'Back', products_path %></td>
+      <th>Thumburl:</th>
+      <td><%= @product.product_image.url(:medium) %></td>
     </tr>
   </table>
+  <hr>
+  <div class="row">
+    <div class="col-md-2 col-md-offset-4">
+      <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-block btn-primary" %>
+    </div>
+    <div class="col-md-2"><%= link_to 'Back', products_path, class: "btn btn-block btn-warning" %></div>
+  </div>
+  <br>
 </div>

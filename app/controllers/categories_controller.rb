@@ -29,6 +29,9 @@ class CategoriesController < ApplicationController
   
   def update
     @category = Category.find(params[:id])
+    if params["category"]["image_delete"].to_i == 1
+      @category.delete_image
+    end
     if @category.update_attributes(category_params)
       flash[:notice] = "Category updated successfully!"
       redirect_to(:action => 'index', :id => @category.id)
@@ -51,6 +54,6 @@ class CategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:name, :thumburl)
+    params.require(:category).permit(:name, :category_image)
   end
 end
