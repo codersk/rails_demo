@@ -30,7 +30,7 @@ class CategoriesController < ApplicationController
   def update
     @category = Category.find(params[:id])
     if params["category"]["image_delete"].to_i == 1
-      @category.delete_image
+      @category.category_image = nil
     end
     if @category.update_attributes(category_params)
       flash[:notice] = "Category updated successfully!"

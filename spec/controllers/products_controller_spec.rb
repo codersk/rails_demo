@@ -58,6 +58,15 @@ RSpec.describe ProductsController, :type => :controller do
       expect(product).to have_attached_file(:product_image)
     end
 
-    it 'product image is should be of type jpeg or gif' 
+    it 'allows image to be removed from product' do
+      put :edit, :id => product.id, :product => product.product_name
+      expect(product.product_image.exists?).to eq(false)
+      # expect(product.product_image).to eq(200) if product.image_delete == 1
+    end
+
+    it 'product image is should be of type jpeg or gif' do
+      expect(product).to validate_attachment_content_type(:product_image)
+        .allowing('image/jpg', 'image/jpeg', 'image/gif').rejecting('text/plain', 'text/xml')
+    end
   end
 end

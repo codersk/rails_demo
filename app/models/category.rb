@@ -10,8 +10,4 @@ class Category < ActiveRecord::Base
   def image_delete
     @image_delete ||= "0"
   end
-
-  def delete_image
-    self.category_image = nil
-  end
 end

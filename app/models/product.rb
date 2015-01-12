@@ -45,8 +45,4 @@ class Product < ActiveRecord::Base
   def image_delete
     @image_delete ||= "0"
   end
-
-  def delete_image
-    self.product_image = nil
-  end
 end

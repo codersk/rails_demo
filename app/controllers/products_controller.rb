@@ -15,7 +15,6 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    binding.pry
     if @product.save
       flash[:notice] = "Product added successfully!"
       redirect_to(:action => 'index')
@@ -32,7 +31,7 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if params["product"]["image_delete"].to_i == 1
-      @product.delete_image
+      @product.product_image = nil
     end
     if @product.update_attributes(product_params)
       flash[:notice] = "Product updated successfully!"
