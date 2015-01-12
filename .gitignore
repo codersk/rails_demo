@@ -16,4 +16,5 @@
 /tmp
 
 # Ignore all public data
+public/images
 public/system
