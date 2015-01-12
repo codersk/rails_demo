@@ -2,7 +2,7 @@
   <table class="table ">
     <tr>
       <th>Product name:</th>
-      <td><%= @product.product_name %></td>
+      <td><%= @product.name %></td>
     </tr>
     <tr>
       <th>Description:</th>
@@ -14,11 +14,7 @@
     </tr>
     <tr>
       <th>Product Image:</th>
-      <td><%= image_tag @product.product_image.url(:medium) %></td>
-    </tr>
-    <tr>
-      <th>Thumburl:</th>
-      <td><%= @product.product_image.url(:medium) %></td>
+      <td><%= image_tag @product.image.url(:medium) %></td>
     </tr>
   </table>
   <hr>

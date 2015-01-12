@@ -5,7 +5,7 @@
       <p>Explore our latest products from around the world.</p>
       <strong>Category name: </strong><%= @category.name %><br>
       <strong>Category Image: </strong><br>
-      <%= image_tag @category.category_image.url(:thumb) %><br>
+      <%= image_tag @category.image.url(:thumb) %><br>
       <%= link_to 'Edit', edit_category_path(@category) %> |
       <%= link_to 'Back', categories_path %> |
       <%= link_to 'Destroy', @category, method: :delete, data: { confirm: 'Are you sure?' } %><br>
@@ -18,9 +18,9 @@
           <% products.compact.each do |product| %>
             <div class='col-md-4'>
               <div class="thumbnail">
-                <%= image_tag product.product_image.url(:medium) %>
+                <%= image_tag product.image.url(:medium) %>
                 <div class="caption">
-                  <span class="listing-title"><%= product.product_name %></span>
+                  <span class="listing-title"><%= product.name %></span>
                   <span class="listing-price"><%= number_to_currency(product.price) %></span>
                   <span><%= link_to "Edit", edit_product_path(product.id) %></span>
                   <span><%= link_to "Delete", products_delete_path(:id => product.id) %></span>
@@ -40,9 +40,9 @@
       <% products.each do |product| %>
         <div class='col-md-3'>
           <div class="thumbnail">
-            <%= image_tag product.product_image.url(:medium) %>
+            <%= image_tag product.image.url(:medium) %>
             <div class="caption">
-              <span class="listing-title"><%= product.product_name %></span>
+              <span class="listing-title"><%= product.name %></span>
               <span class="listing-desc"><%= product.description %></span>
               <span class="listing-price"><%= number_to_currency(product.price) %></span>
               <span><%= link_to "Edit", edit_product_path(product.id) %></span>

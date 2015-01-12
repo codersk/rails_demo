@@ -13,9 +13,10 @@
             <% categories.each do |category| %>
               <div class='col-md-4'>
                 <div class="thumbnail">
-                  <%= image_tag category.category_image.url(:thumb) %>
+                  <%= image_tag category.image.url(:thumb) %>
                   <div class="caption">
                     <span class="listing-title"><%= category.name %></span><br>
+                    <span><%= category.description %></span><br>
                     <span><%= link_to "Edit", edit_category_path(category.id) %> |</span>
                     <span><%= link_to 'Show', category %> |</span>
                     <td><%= link_to 'Delete', categories_delete_path(:id => category.id) %></td>

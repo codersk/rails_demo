@@ -1,8 +1,8 @@
 <%= form_for(@product, :html => { :multipart => true } ) do |f| %>
   <table class="table">
     <tr class="row">
-      <th class="col-md-3"><%= f.label :product_name %></th>
-      <td class="col-md-3"><%= f.text_field :product_name, class: "col-md-12"  %></td>
+      <th class="col-md-3"><%= f.label :name %></th>
+      <td class="col-md-3"><%= f.text_field :name, class: "col-md-12"  %></td>
     </tr>
     <tr class="row">
       <th class="col-md-3"><%= f.label :description %></th>
@@ -21,10 +21,10 @@
       <td class="col-md-3"><%= f.text_field :tax_rate, class: "col-md-12"  %></td>
     </tr>
     <tr class="row">
-      <th class="col-md-3"><%= f.label :product_image %></th>
+      <th class="col-md-3"><%= f.label :image %></th>
       <td class="col-md-3">
-        <%= image_tag @product.product_image.url(:medium) %>
-        <%= f.file_field :product_image, class: "col-md-12"  %>
+        <%= image_tag @product.image.url(:medium) %>
+        <%= f.file_field :image, class: "col-md-12"  %>
       </td>
     </tr>
     <tr class="row">

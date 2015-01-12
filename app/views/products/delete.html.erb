@@ -1,24 +1,8 @@
 <div class="container">
-  <p>
-    <strong>Product name: <%= @product.product_name %></strong>
-
-  </p>
-
-  <p>
-    <strong>Description: <%= @product.description %></strong>
-
-  </p>
-
-  <p>
-    <strong>Price: <%= @product.price %></strong>
-
-  </p>
-
-  <p>
-    <strong>Thumburl: <%= @product.thumburl %></strong>
-
-  </p>
-
+  <p><strong>Product name: <%= @product.name %></strong></p>
+  <p><strong>Description: <%= @product.description %></strong></p>
+  <p><strong><%= image_tag @product.image.url("medium") %></strong></p>
+  <p><strong>Price: <%= @product.price %></strong></p>
 
   <%= link_to 'Delete', @product, method: :delete %> |
   <%= link_to 'Edit', edit_product_path(@product) %> |

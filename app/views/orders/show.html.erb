@@ -12,15 +12,15 @@
       <th> Product Name </th>
       <th> Unit Price </th>
       <th> Quantity </th>
-      <th> Subtotal </th>
-      <th> Tax </th>
-      <th> Total </th>
+      <th class="text-right"> Subtotal </th>
+      <th class="text-right"> Tax </th>
+      <th class="text-right"> Total </th>
       <th></th>
     </tr>
     <% @order.line_items.each do |line_item| %>
       <tr>
         <td class='col-md-4'>
-          <%= line_item.product.product_name %>
+          <%= line_item.product.name %>
         </td>
         <td class='col-md-1'>
           <%= line_item.product.price %>
@@ -35,9 +35,9 @@
             <%= line_item.qty %>
           <% end %>
         </td>
-        <td> $<%= line_item.product.price * line_item.qty %></td>
-        <td> $<%= line_item.tax.round(2) %> </td>
-        <td> $<%= line_item.total.round(2) %></td>
+        <td class="text-right"> $<%= line_item.product.price * line_item.qty %></td>
+        <td class="text-right"> $<%= line_item.tax.round(2) %> </td>
+        <td class="text-right"> $<%= line_item.total.round(2) %></td>
         <td>
           <%= link_to 'Remove', line_item, method: :delete,class: "btn btn-block btn-danger btn-xs" if @order.status == 'cart' %>
         </td>
@@ -47,11 +47,13 @@
       <td></td>
       <td></td>
       <td></td>
-      <td><strong> $<%= @order.subtotal.round(2) %></strong></td>
-      <td>
+      <td class="text-right">
+        <strong> $<%= @order.subtotal.round(2) %></strong>
+      </td>
+      <td class="text-right">
         <strong> $<%= @order.tax %></strong>
       </td>
-      <td>
+      <td class="text-right">
         <strong> $<%= @order.total.round(2) %></strong>
       </td>
       <td>

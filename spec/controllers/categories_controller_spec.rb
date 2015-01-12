@@ -43,16 +43,16 @@ RSpec.describe CategoriesController, :type => :controller do
     end
 
     it 'allows image to be added to category' do
-      expect(category).to have_attached_file(:category_image)
+      expect(category).to have_attached_file(:image)
     end
 
     it 'allows image to be removed from category' do
       put :edit, :id => category.id, :category => category.id
-      expect(category.category_image.exists?).to eq(false)
+      expect(category.image.exists?).to eq(false)
     end
 
     it 'category image is should be of type jpeg or gif' do
-      expect(category).to validate_attachment_content_type(:category_image)
+      expect(category).to validate_attachment_content_type(:image)
         .allowing('image/jpg', 'image/jpeg', 'image/gif').rejecting('text/plain', 'text/xml')
     end
   end
