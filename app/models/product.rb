@@ -1,14 +1,12 @@
 class Product < ActiveRecord::Base
+  include Image
+
   belongs_to  :category
   has_many  :line_items
 
-  validates :name, :category_id, presence: true
+  validates :category_id, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validates :tax_rate, numericality: { greater_than_or_equal_to: 0 }
-  # validates :thumburl, format:{ with: URI::regexp( %w(http https) )}
-
-  has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/noimage.jpg"
-  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   def add_item(product_id)
     item = items.where('product_id = ?', product_id).first
@@ -24,7 +22,12 @@ class Product < ActiveRecord::Base
   def add_new_item(current_user, qty)
     order =  Order.find_by(user_id: current_user.id, status: 'cart')
     if order
-      LineItem.create(order_id: Order.find_by(user_id: current_user.id).id , product_id: id, qty: qty , tax: tax_rate)
+      li = order.line_items.find_by(product_id: id)
+      if li
+        li.update_quantity( li.qty + qty )
+      else
+        LineItem.create(order_id: order.id , product_id: id, qty: qty , tax: tax_rate)
+      end
       return order
     else
       Order.create( billing_address: "BEML", shipping_address: "BTM", user_id: current_user.id)
@@ -40,13 +43,5 @@ class Product < ActiveRecord::Base
     else
       "All fields are requaired!"
     end
-  end
-
-  def image_delete
-    @image_delete ||= "0"
-  end
-
-  def delete_image
-    self.product_image = nil
   end
 end

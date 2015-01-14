@@ -51,5 +51,9 @@ RSpec.describe Order, :type => :model do
     end
   end
 
-  it "Cancels the Order correctly"
+  it "Cancels the Order correctly" do
+    if order.cancel
+      expect(order.status).to match('cancelled')
+    end
+  end
 end
