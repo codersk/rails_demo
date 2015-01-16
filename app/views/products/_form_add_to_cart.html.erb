@@ -1,4 +1,4 @@
 <%= form_for(locals[:product], url: products_add_to_cart_path(locals[:product]), method: :post ) do |f| %>
-    <%= text_field :qty, :value %>
-    <%= f.submit 'Add to cart', class: "btn btn-info" %>
+  <%= text_field :qty, :value %>
+  <%= f.submit 'Add to cart', class: "btn btn-info" %>
 <% end %>

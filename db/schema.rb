@@ -11,16 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141223091622) do
+ActiveRecord::Schema.define(version: 20150112100642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: true do |t|
     t.string   "name"
-    t.string   "thumburl"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.text     "description"
   end
 
   create_table "line_items", force: true do |t|
@@ -47,14 +51,17 @@ ActiveRecord::Schema.define(version: 20141223091622) do
   end
 
   create_table "products", force: true do |t|
-    t.string   "product_name"
+    t.string   "name"
     t.text     "description"
     t.float    "price"
-    t.string   "thumburl"
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "tax_rate"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "users", force: true do |t|
@@ -70,6 +77,10 @@ ActiveRecord::Schema.define(version: 20141223091622) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

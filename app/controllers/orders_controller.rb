@@ -42,7 +42,7 @@ class OrdersController < ApplicationController
   end
 
   def cancel
-    Order.find(params[:id]).update_attributes(status: 'cancelled')
+    Order.find(params[:id]).cancel
     redirect_to orders_path
   end
 

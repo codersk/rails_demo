@@ -27,11 +27,15 @@ class Order < ActiveRecord::Base
   def authorize (credit_card)
     if credit_card[:card_number] != ""
       self.status = 'payment_complete'
-      self.save
+      self.save!
       msg = "Card Details\n Number: " + credit_card[:card_number] +"\n Expairy Date: " + credit_card[:expiry_date] + "\nCVV: " + credit_card[:cvv]
     else
       "All fields are requaired!"
     end
   end
-  
+
+  def cancel
+    self.update_attributes(status: 'cancelled')
+    self.save!
+  end
 end

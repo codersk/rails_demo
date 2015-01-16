@@ -52,3 +52,6 @@ group :development, :test do
 end
 
 gem 'factory_girl_rails'
+
+# Paperclip is intended as an easy file attachment library for Active Record.
+gem "paperclip", "~> 4.2"

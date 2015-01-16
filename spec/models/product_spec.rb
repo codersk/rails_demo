@@ -7,7 +7,7 @@ RSpec.describe Product, :type => :model do
   let(:order) { FactoryGirl.create(:order, user: current_user) }
 
   it "Product name should not be empty" do
-    expect(product.product_name).not_to be_empty
+    expect(product.name).not_to be_empty
   end
 
   it "Product price should be greater than or equal to 0" do
@@ -18,13 +18,9 @@ RSpec.describe Product, :type => :model do
     expect(product.tax_rate).to be >= 0
   end
 
-  it "Product thumburl should have 'http' or 'https' as prefix" do
-    expect(product.thumburl).to match( /^http(s?)\W/ )
-  end
-
   # negative passing case
   it "Product name should not contain numeric values" do
-    expect(product.product_name).to be_a(String)
+    expect(product.name).to be_a(String)
   end
 
   it "Product description should not be empty" do
@@ -50,7 +46,7 @@ RSpec.describe Product, :type => :model do
   # Negative test cases
 
   it "creating product without name should raise error" do
-    expect{ product.product_name = nil; product.save!.save }.to raise_error( ActiveRecord::RecordInvalid )
+    expect{ product.name = nil; product.save!.save }.to raise_error( ActiveRecord::RecordInvalid )
   end
 
   it "creating product without price should raise error" do
@@ -77,5 +73,9 @@ RSpec.describe Product, :type => :model do
     expect{ product.add_new_item(user, 1) }.to change(LineItem, :count ).by(1)
   end
 
-  it "adding the same product into cart should increase line item quantity by 1"
+  it "adding the same product into cart should increase line item quantity by 1" do
+    expect{ product.add_new_item(user, 1); product.add_new_item(user, 2) }.to change(LineItem, :count ).by(1)
+    expect(LineItem.first.qty).to eq(3)
+  end
+
 end

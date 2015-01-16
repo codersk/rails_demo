@@ -1,2 +1,14 @@
-<%= render 'topnav' %>
-This is the home page
+<div class="container">
+  <h1>This is the Etsy Homepage!</h1>
+  <div class="row">
+    <div class="col-md-4">
+      <%= link_to 'Categories', categories_path, class: "btn btn-block btn-primary" %><br>
+    </div>
+    <div class="col-md-4">
+      <%= link_to 'Products', products_path, class: "btn btn-block btn-success" %><br>
+    </div>
+    <div class="col-md-4">
+      <%= link_to 'Orders', orders_path, class: "btn btn-block btn-warning" %><br>
+    </div>
+  </div>
+</div>
